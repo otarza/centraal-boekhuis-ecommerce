@@ -16,6 +16,7 @@ class Order
     private $identifier;
     private $date;
     private $reference;
+    private $ownerReference;
     private $customer;
     private $billingAddress;
     private $paymentReference;
@@ -34,14 +35,18 @@ class Order
      */
     private $texts;
 
-    public function __construct($identifier, DateTime $date, $reference = null)
+    public function __construct($identifier, DateTime $date, $ownerReference = null, $reference = null)
     {
+        if (is_null($ownerReference)) {
+            $ownerReference = $identifier;
+        }
         if (is_null($reference)) {
             $reference = $identifier;
         }
 
         $this->identifier = $identifier;
         $this->date = $date;
+        $this->ownerReference = $ownerReference;
         $this->reference = $reference;
         $this->products = new ArrayIterator();
         $this->texts = new ArrayObject();
@@ -74,6 +79,11 @@ class Order
     public function getReference()
     {
         return $this->reference;
+    }
+
+    public function getOwnerReference()
+    {
+        return $this->ownerReference;
     }
 
     public function getProducts()

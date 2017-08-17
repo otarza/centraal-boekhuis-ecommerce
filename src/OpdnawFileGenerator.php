@@ -52,7 +52,7 @@ class OpdnawFileGenerator
         if (is_null($transactionDetails)) {
             $transactionDetails = new TransactionDetails(
                 $this->order->getDate(),
-                $this->order->getReference(),
+                $this->order->getOwnerReference(),
                 $this->order->getReference(),
                 $this->order->addDepositTransferCard(),
                 $this->order->addPrices(),
